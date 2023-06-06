@@ -8,7 +8,6 @@ export default (filepath1, filepath2) => {
   const keys2 = Object.keys(data2);
   const keysAll = _.union(keys1, keys2);
   const sortedKeys = _.orderBy((keysAll));
-
   const comparePaths = sortedKeys.reduce((acc, key) => {
     if (keys1.includes(key) && keys2.includes(key)) {
       if (data1[key] === data2[key]) {
@@ -26,7 +25,5 @@ export default (filepath1, filepath2) => {
   }, '{');
   const result = `${comparePaths}\n}`;
   console.log(result);
-  return `${comparePaths}\n}`;
+  return result;
 };
-
-
