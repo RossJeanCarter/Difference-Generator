@@ -15,5 +15,4 @@ program
     console.log(parser(filepath1, filepath2, options.format));
     parser(filepath1, filepath2, options.format);
   });
-
 program.parse();
