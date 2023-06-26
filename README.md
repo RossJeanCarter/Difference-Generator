@@ -11,10 +11,8 @@ Extensions available: json, yaml
 Formats available: stylish, plain, json
 
 ### Installation
-git@github.com:RossJeanCarter/frontend-project-46.git
-
+> git@github.com:RossJeanCarter/frontend-project-46.git
 make install
-
 sudo npm link
 
 ### Program Demo
