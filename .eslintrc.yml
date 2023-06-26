@@ -21,3 +21,8 @@ rules:
     - js: always
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
   'consistent-return': 'off'
+
+globals:
+  describe: readonly
+  test: readonly
+  expect: readonly
