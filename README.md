@@ -7,8 +7,11 @@
 ### Description
 The program is called difference generator. It takes two files in different extensions and shows the difference between them. 
 
-Extensions available: json, yaml
-Formats available: stylish, plain, json
+#### Extensions available: 
+    json, yaml
+
+#### Formats available: 
+    stylish, plain, json
 
 ### Installation
     git@github.com:RossJeanCarter/frontend-project-46.git
