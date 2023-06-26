@@ -1,29 +1,26 @@
 import { readFileSync } from 'fs';
-import _ from 'lodash';
+import path from 'path';
+import parse from './parsers.js';
+import buildDiff from './buildDiff.js';
+import getFormatting from './formatters/index.js';
 
-export default (filepath1, filepath2) => {
-  const data1 = JSON.parse(readFileSync(filepath1, 'utf8'));
-  const data2 = JSON.parse(readFileSync(filepath2, 'utf8'));
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const keysAll = _.union(keys1, keys2);
-  const sortedKeys = _.orderBy((keysAll));
-  const comparePaths = sortedKeys.reduce((acc, key) => {
-    if (keys1.includes(key) && keys2.includes(key)) {
-      if (data1[key] === data2[key]) {
-        acc += `\n    ${key}: ${data1[key]}`; //
-      } else {
-        acc += `\n  - ${key}: ${data1[key]}`;//-
-        acc += `\n  + ${key}: ${data2[key]}`;//+
-      }
-    } else if (keys1.includes(key)) {
-      acc += `\n  - ${key}: ${data1[key]}`;//-
-    } else if (keys2.includes(key)) {
-      acc += `\n  + ${key}: ${data2[key]}`;//+
-    }
-    return acc;
-  }, '{');
-  const result = `${comparePaths}\n}`;
-  console.log(result);
-  return result;
+const getPath = (file) => path.resolve(process.cwd(), file);
+const getFormat = (file) => path.extname(file).slice(1);
+
+const parser = (file1, file2, format = 'stylish') => {
+  const path1 = getPath(file1);
+  const path2 = getPath(file2);
+
+  const formatNameFile1 = getFormat(file1);
+  const formatNameFile2 = getFormat(file2);
+
+  const data1 = parse(readFileSync(path1), formatNameFile1);
+  const data2 = parse(readFileSync(path2), formatNameFile2);
+
+  const diff = buildDiff(data1, data2);
+
+  const formatedDiff = getFormatting(diff, format);
+  return formatedDiff;
 };
+
+export default parser;
