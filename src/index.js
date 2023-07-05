@@ -14,8 +14,8 @@ const parser = (file1, file2, format = 'stylish') => {
   const formatNameFile1 = getFormat(file1);
   const formatNameFile2 = getFormat(file2);
 
-  const data1 = parse(readFileSync(path1), formatNameFile1);
-  const data2 = parse(readFileSync(path2), formatNameFile2);
+  const data1 = parse(readFileSync(path1, 'utf-8'), formatNameFile1);
+  const data2 = parse(readFileSync(path2, 'utf-8'), formatNameFile2);
 
   const diff = buildDiff(data1, data2);
 
