@@ -7,6 +7,9 @@
 ### Description
 The program is called difference generator. It takes two files in different extensions and shows the difference between them. 
 
+### Requirements
+    node.js
+
 #### Extensions available: 
     json, yaml
 
@@ -18,5 +21,14 @@ The program is called difference generator. It takes two files in different exte
     make install
     sudo npm link
 
-### Program Demo
-[![asciicast](https://asciinema.org/a/WseFN56vkRD28HpjPMmKpJz2e.svg)](https://asciinema.org/a/WseFN56vkRD28HpjPMmKpJz2e)
+### Run
+    gendiff <file1> <file2> --format <format>
+
+### Help
+[![asciicast](https://asciinema.org/a/0TmiKdrC9NHX9wEn2DdEPiijG.svg)](https://asciinema.org/a/0TmiKdrC9NHX9wEn2DdEPiijG)
+
+### Json Files Comparison (different formats)
+[![asciicast](https://asciinema.org/a/fKtcki6MUC9KSIbCvyu8BHNjK.svg)](https://asciinema.org/a/fKtcki6MUC9KSIbCvyu8BHNjK)
+
+### Yml Files Comparison (different formats)
+[![asciicast](https://asciinema.org/a/8elT3duXL52aNiVg7vZ9NWmZq.svg)](https://asciinema.org/a/8elT3duXL52aNiVg7vZ9NWmZq)

@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
+import { describe } from '@jest/globals';
 import parser from '../src/index.js';
 
 const __filename = new URL(import.meta.url).pathname;
@@ -16,38 +17,22 @@ const resultPathStylish = getFixturePath('result_stylish.txt');
 const resultPathPlain = getFixturePath('result_plain.txt');
 const resultPathJson = getFixturePath('result_json.txt');
 
-describe('Stylish Format', () => {
-  const result = readFileSync(resultPathStylish, 'utf-8');
+describe('File Comparison', () => {
+  const formatters = [
+    { name: 'Format Stylish', format: 'stylish', resultPath: resultPathStylish },
+    { name: 'Format Plain', format: 'plain', resultPath: resultPathPlain },
+    { name: 'Format Json', format: 'json', resultPath: resultPathJson },
+  ];
 
-  test('file.json', () => {
-    expect(parser(jsonFile1, jsonFile2)).toBe(result);
-  });
-
-  test('file.yaml', () => {
-    expect(parser(ymlFile1, ymlFile2)).toBe(result);
-  });
-});
-
-describe('Plain Format', () => {
-  const result = readFileSync(resultPathPlain, 'utf-8');
-
-  test('file.json', () => {
-    expect(parser(jsonFile1, jsonFile2, 'plain')).toBe(result);
-  });
-
-  test('file.yaml', () => {
-    expect(parser(ymlFile1, ymlFile2, 'plain')).toBe(result);
-  });
-});
-
-describe('JSON Format', () => {
-  const result = readFileSync(resultPathJson, 'utf-8');
-
-  test('file.json', () => {
-    expect(parser(jsonFile1, jsonFile2, 'json')).toBe(result);
-  });
-
-  test('file.yml', () => {
-    expect(parser(ymlFile1, ymlFile2, 'json')).toBe(result);
+  formatters.forEach(({ name, format, resultPath }) => {
+    const result = readFileSync(resultPath, 'utf-8');
+    describe(name, () => {
+      test.each([
+        [jsonFile1, jsonFile2],
+        [ymlFile1, ymlFile2],
+      ])('%s', (file1, file2) => {
+        expect(parser(file1, file2, format)).toBe(result);
+      });
+    });
   });
 });
