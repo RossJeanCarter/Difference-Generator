@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
-import { describe } from '@jest/globals';
 import parser from '../src/index.js';
 
 const __filename = new URL(import.meta.url).pathname;
@@ -18,19 +17,20 @@ const resultPathPlain = getFixturePath('result_plain.txt');
 const resultPathJson = getFixturePath('result_json.txt');
 
 describe('File Comparison', () => {
-  const formatters = [
-    { name: 'Format Stylish', format: 'stylish', resultPath: resultPathStylish },
-    { name: 'Format Plain', format: 'plain', resultPath: resultPathPlain },
-    { name: 'Format Json', format: 'json', resultPath: resultPathJson },
+  const formats = [
+    { name: 'Stylish Format', format: 'stylish', resultPath: resultPathStylish },
+    { name: 'Plain Format', format: 'plain', resultPath: resultPathPlain },
+    { name: 'JSON Format', format: 'json', resultPath: resultPathJson },
   ];
 
-  formatters.forEach(({ name, format, resultPath }) => {
+  formats.forEach(({ name, format, resultPath }) => {
     const result = readFileSync(resultPath, 'utf-8');
+
     describe(name, () => {
       test.each([
-        [jsonFile1, jsonFile2],
-        [ymlFile1, ymlFile2],
-      ])('%s', (filename, file1, file2) => {
+        ['file.json', jsonFile1, jsonFile2],
+        ['file.yaml', ymlFile1, ymlFile2],
+      ])('%s', (fileName, file1, file2) => {
         expect(parser(file1, file2, format)).toBe(result);
       });
     });
