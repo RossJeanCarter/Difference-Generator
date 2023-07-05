@@ -30,7 +30,7 @@ describe('File Comparison', () => {
       test.each([
         ['file.json', jsonFile1, jsonFile2],
         ['file.yaml', ymlFile1, ymlFile2],
-      ])('%s', (fileName, file1, file2) => {
+      ])('%s', (file1, file2) => {
         expect(parser(file1, file2, format)).toBe(result);
       });
     });
