@@ -26,7 +26,7 @@ describe('File Comparison', () => {
   formats.forEach(({ name, format, resultPath }) => {
     const result = readFileSync(resultPath, 'utf-8');
 
-    describe(name, () => {
+    describe(`${name}`, () => {
       test.each([
         ['file.json', jsonFile1, jsonFile2],
         ['file.yaml', ymlFile1, ymlFile2],
