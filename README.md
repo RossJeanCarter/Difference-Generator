@@ -17,7 +17,7 @@ The program is called difference generator. It takes two files in different exte
     stylish, plain, json
 
 ### Installation
-    git@github.com:RossJeanCarter/frontend-project-46.git
+    git clone https://github.com/RossJeanCarter/Difference-Generator.git
     make install
     sudo npm link
 
